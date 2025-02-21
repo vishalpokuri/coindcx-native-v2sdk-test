@@ -7,14 +7,15 @@ export function ManualTokenInput() {
   const [oktoClient, setOktoClient] = useState(null);
   const [message, setMessage] = useState("");
 
+  const okto = useOkto();
   const authenticateWithOkto = async () => {
     try {
-      const okto = useOkto();
       await okto.loginUsingOAuth({
         idToken: idToken,
         provider: "google",
       });
       setOktoClient(okto);
+      console.log(oktoClient);
       setMessage("Authentication successful!");
     } catch (error) {
       console.error("Authentication error:", error);
@@ -32,15 +33,22 @@ export function ManualTokenInput() {
         onChangeText={setIdToken}
       />
       <Button title="Authenticate with Okto" onPress={authenticateWithOkto} />
-      {message ? <Text>{message}</Text> : null}
+      {message ? (
+        <>
+          <Text>{message}</Text>
+        </>
+      ) : null}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
+    flex: 1,
+    justifyContent: "center",
     alignItems: "center",
+    padding: 20,
+    backgroundColor: "#000", // Setting background color to black
   },
   input: {
     width: "80%",
@@ -49,5 +57,21 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "gray",
     borderRadius: 5,
+    color: "#fff", // Text color white for better contrast
+    backgroundColor: "#222", // Darker background for input
+  },
+  button: {
+    backgroundColor: "#fff",
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 10,
+  },
+  buttonText: {
+    color: "#000",
+    fontWeight: "bold",
+  },
+  message: {
+    color: "#fff",
+    marginTop: 10,
   },
 });
