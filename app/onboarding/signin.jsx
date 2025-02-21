@@ -7,48 +7,15 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useState } from "react";
-import { Link, router } from "expo-router";
-import { BASE_API_URL } from "../../constants/ngrokRoute";
-import { setItem } from "../../utils/asyncStorage";
+
 import CustomModal from "../../components/modal/customModal";
-import { ManualTokenInput } from "../../components/GoogleSigninText";
+// import { ManualTokenInput } from "../../components/GoogleSigninText";
+import { GoogleWeb } from "../../components/GoogleSigninWeb";
 
 export default function Signin() {
-  const [form, setForm] = useState({
-    email: "",
-    password: "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [visible, setVisible] = useState(false);
   const toggleClose = () => {
     setVisible(false);
-  };
-  const submit = async () => {
-    try {
-      await setItem("email", form.email);
-      setIsSubmitting(true);
-      const response = await fetch(`${BASE_API_URL}/api/auth/signin`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-      const data = await response.json();
-      if (response.ok) {
-        setTimeout(() => {
-          router.push(`./signup/otp?otpToken=${data.otpToken}`);
-          setIsSubmitting(false);
-        }, 500);
-      } else {
-        setVisible(true);
-        setTimeout(() => {
-          setVisible(false);
-        }, 1600);
-      }
-    } catch (err) {
-      console.error("Error logging in: ", err);
-    } finally {
-      setIsSubmitting(false);
-    }
   };
 
   return (
@@ -59,7 +26,7 @@ export default function Signin() {
       >
         <View style={styles.innerContainer}>
           <Text style={styles.title}>Log in</Text>
-          <ManualTokenInput />
+          <GoogleWeb />
         </View>
         <CustomModal
           animSource="fail"

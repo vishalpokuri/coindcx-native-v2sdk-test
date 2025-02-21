@@ -11,9 +11,10 @@ export function ManualTokenInput() {
   const authenticateWithOkto = async () => {
     try {
       await okto.loginUsingOAuth({
-        idToken: idToken,
+        idToken: idToken.toString(),
         provider: "google",
       });
+      console.log("Login success");
       setOktoClient(okto);
       console.log(oktoClient);
       setMessage("Authentication successful!");
