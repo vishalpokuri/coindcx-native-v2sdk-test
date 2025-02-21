@@ -7,11 +7,8 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useState } from "react";
-
 import CustomModal from "../../components/modal/customModal";
-import { ManualTokenInput } from "../../components/GoogleSigninText";
 import { GoogleWeb } from "../../components/GoogleSigninWeb";
-
 export default function Signin() {
   const [visible, setVisible] = useState(false);
   const toggleClose = () => {

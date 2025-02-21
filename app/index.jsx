@@ -15,7 +15,7 @@ import * as SplashScreen from "expo-splash-screen";
 import WelcomeFlow from "../components/welcomeFlowComps/main";
 import { OktoProvider } from "@okto_web3/react-native-sdk";
 import { Buffer } from "buffer";
-import ManualTokenInput from "../components/GoogleSigninText";
+import { CLIENT_SWA, CLIENT_PRIVATE_KEY } from "../constants/keys";
 
 // Make Buffer globally available
 global.Buffer = global.Buffer || Buffer;
@@ -25,9 +25,8 @@ SplashScreen.setOptions({ duration: 1000, fade: true });
 
 const config = {
   environment: "sandbox",
-  clientPrivateKey:
-    "0x2aaa089f7e26ad3d2da3518e1e945d76804372b6bdd044c7f059598c31fa7dcc",
-  clientSWA: "0xb532926d0dBC2799Cf8BE2d6e2F1ef8Bd27CaA0c",
+  clientPrivateKey: CLIENT_PRIVATE_KEY,
+  clientSWA: CLIENT_SWA,
 };
 
 export default function Index() {
@@ -72,7 +71,7 @@ export default function Index() {
           <WelcomeFlow />
           <TouchableOpacity
             style={styles.button}
-            onPress={() => router.push("/onboarding/signin")}
+            onPress={() => router.push("./onboarding/signin")}
           >
             <Text style={styles.buttonText}>Get Started</Text>
           </TouchableOpacity>
