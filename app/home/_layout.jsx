@@ -78,6 +78,13 @@ const AuthLayout = () => {
             gestureDirection: "horizontal",
           }}
         />
+        <Stack.Screen
+          name="cardPage"
+          options={{
+            gestureEnabled: true,
+            gestureDirection: "horizontal",
+          }}
+        />
       </Stack>
       <StatusBar backgroundColor="#000000" style="light" translucent={true} />
     </View>
