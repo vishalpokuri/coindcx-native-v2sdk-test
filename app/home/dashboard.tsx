@@ -25,6 +25,7 @@ interface FormState {
   phoneNumber: string;
   description: string;
   email: string;
+  position: string;
 }
 export default function Dashboard() {
   const oktoClient = useOkto();
@@ -37,6 +38,7 @@ export default function Dashboard() {
     description: "",
     email: "",
     phoneNumber: "",
+    position: "",
   });
   const [error, setError] = useState<string>("");
 
@@ -132,7 +134,14 @@ export default function Dashboard() {
           <Text style={styles.title}>Add your Business Details</Text>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => router.push("./cardPage")}
+            onPress={() =>
+              router.push({
+                pathname: "./cardPage",
+                params: {
+                  ...form,
+                },
+              })
+            }
           >
             <Text>Continue</Text>
           </TouchableOpacity>
@@ -148,6 +157,12 @@ export default function Dashboard() {
           placeholder="John Doe"
           value={form.name}
           onChangeText={(e: string) => setForm({ ...form, name: e })}
+        />
+        <BlackInput
+          label="Position"
+          placeholder="CEO"
+          value={form.position}
+          onChangeText={(e: string) => setForm({ ...form, position: e })}
         />
         <BlackInput
           label="Address"
