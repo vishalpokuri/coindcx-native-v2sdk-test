@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   leftSection: {
-    width: "40%",
+    width: "35%",
     justifyContent: "center",
     paddingRight: 16,
   },

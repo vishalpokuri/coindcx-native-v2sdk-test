@@ -66,7 +66,7 @@ export default function Dashboard() {
           // Verify the data structure and log it for debugging
           setAccounts(
             userAccounts.filter(
-              (account: Account) => account.networkName === "BASE"
+              (account: Account) => account.networkName === "BASE_TESTNET"
             )
           );
         } else {
