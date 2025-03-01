@@ -70,7 +70,10 @@ To enable `@react-native-google-signin/google-signin`, you need to configure Goo
    - Refer to this solution: [GitHub Issue #1358](https://github.com/react-native-google-signin/google-signin/issues/1358)
 2. If the issue persists, make sure you followed all the steps in this troubleshooting guide: [Google Sign-In Troubleshooting](https://react-native-google-signin.github.io/docs/troubleshooting#developer_error)
 
-### 5. Build and Run the App
+### 5. Update your keys
+Update the credentials with the credentials that are obtained from the google console.
+
+### 6. Build and Run the App
 Finally, build and run the project using:
 ```sh
 npx expo run:android
