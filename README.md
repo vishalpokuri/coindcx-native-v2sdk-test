@@ -1,50 +1,80 @@
-# Welcome to your Expo app 👋
+# Project Setup Guide
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
-
-## Get started
-
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-    npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+## Cloning the Repository
+To get started with this project, clone the repository:
+```sh
+git clone https://github.com/vishalpokuri/coindcx-native-v2sdk-test.git
+cd coindcx-native-v2sdk-test
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Important Note
+⚠️ **Caution:** This app must be built and run as a compiled version. It **does not** work with Expo Go.
 
-## Learn more
+## Installation Steps
 
-To learn more about developing your project with Expo, look at the following resources:
+### 1. Install Dependencies
+Run the following command to install required dependencies:
+```sh
+npx expo install
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+### 2. Modify Node Modules
+After installation, navigate to the following directories and modify the specified lines:
 
-## Join the community
+#### File: `node_modules\@okto_web3\react-native-sdk\dist\commonjs\userop\index.js`
+Change this line:
+```js
+var _userop = require("@okto_web3/core-js-sdk/userop");
+```
+to:
+```js
+var _userop = require("@okto_web3/core-js-sdk/dist/userop");
+```
 
-Join our community of developers creating universal apps.
+#### File: `node_modules\@okto_web3\react-native-sdk\dist\commonjs\explorer\index.js`
+Change this line:
+```js
+var _explorer = require("@okto_web3/core-js-sdk/explorer");
+```
+to:
+```js
+var _explorer = require("@okto_web3/core-js-sdk/dist/explorer");
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### 3. Prebuild the Project
+Run the following command to create a keystore and set up the necessary configurations:
+```sh
+npx expo prebuild
+```
+
+### 4. Configure Google Sign-In
+To enable `@react-native-google-signin/google-signin`, you need to configure Google Cloud Console:
+
+#### Steps:
+- Create **two clients** in Google Cloud Console:
+  1. Web Client *(Refer to the provided screenshot for details)*
+![image](https://github.com/user-attachments/assets/21b6b465-f822-4cf2-bb98-c43cd9c600f4)
+
+  ⚠️ **WARNING:** You still need the `androidClientId` for Android apps.
+  2. Android Client
+- For the Android Client:
+  - Find the package name in `app.json` under `expo.android.package`
+  - Ensure you get the correct SHA-1 key for the Android Client to initialize in Google Cloud.
+  
+#### Steps to Follow for correct SHA-1 key:
+1. If you are using `eas` to build the production app, the `@react-native-google-signin/google-signin` package does **not** allow you to use `eas credentials`'s SHA-1 key. You **must** generate the key manually using:
+   ```sh
+   keytool -keystore path/to/keystore.keystore -list -v
+   ```
+   Otherwise, you will get the infamous `DEVELOPER_ERROR` or **status code 10** error. **This is the most important step.**
+   - Refer to this solution: [GitHub Issue #1358](https://github.com/react-native-google-signin/google-signin/issues/1358)
+2. If the issue persists, make sure you followed all the steps in this troubleshooting guide: [Google Sign-In Troubleshooting](https://react-native-google-signin.github.io/docs/troubleshooting#developer_error)
+
+### 5. Build and Run the App
+Finally, build and run the project using:
+```sh
+npx expo run:android
+```
+
+The app should now be set up and running successfully! 🎉
+
