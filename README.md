@@ -64,7 +64,7 @@ To enable `@react-native-google-signin/google-signin`, you need to configure Goo
 #### Steps to Follow for correct SHA-1 key:
 1. If you are using `eas` to build the production app, the `@react-native-google-signin/google-signin` package does **not** allow you to use `eas credentials`'s SHA-1 key. You **must** generate the key manually using:
    ```sh
-   keytool -keystore path/to/keystore.keystore -list -v
+   keytool -keystore path/to/debug.keystore -list -v
    ```
    Otherwise, you will get the infamous `DEVELOPER_ERROR` or **status code 10** error. **This is the most important step.**
    - Refer to this solution: [GitHub Issue #1358](https://github.com/react-native-google-signin/google-signin/issues/1358)
